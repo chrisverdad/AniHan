@@ -20,8 +20,7 @@ function handleLogin() {
     <!-- Right side (login form) -->
     <div class="login-form">
       <div class="form-box">
-        <!-- Replace heading + paragraph with logo -->
-        <img src="@/assets/images/logo.png" alt="AniHan Logo" class="login-logo" />
+        <img src="@/assets/images/AniHan.png" alt="AniHan Logo" class="login-logo" />
         <p>Login to Your Account</p>
         <form @submit.prevent="handleLogin">
           <input type="text" v-model="username" placeholder="Username" required />
@@ -59,7 +58,7 @@ function handleLogin() {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f5f5f5ff;
+  background: #f5f5f5;
 }
 
 .login-logo {
@@ -72,14 +71,10 @@ function handleLogin() {
   width: 100%;
   max-width: 300px;
   padding: 2rem;
-}
-
-.form-box h2 {
-  margin-bottom: 2rem;
-  color: #2e7d32;
   text-align: center;
 }
 
+/* Inputs */
 input {
   width: 100%;
   padding: 0.75rem;
@@ -97,7 +92,6 @@ input:focus {
 .login-links {
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
-  text-align: center;
 }
 
 .login-links a {
@@ -124,5 +118,41 @@ button {
 
 button:hover {
   background-color: #388e3c;
+}
+
+/* 📱 Mobile responsiveness */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .login-image {
+    position: absolute;
+    inset: 0;
+    flex: none;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* background goes behind */
+  }
+
+  .login-form {
+    flex: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+  }
+
+  /* 🎨 Turn into card ONLY on mobile */
+  .form-box {
+    background: #ffffffee;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
 }
 </style>
