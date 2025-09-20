@@ -8,7 +8,7 @@ const router = useRouter()
 
 function handleLogin() {
   // Test: go directly to HomepageView
-  router.push('/home')
+  router.push('/dash')
 }
 </script>
 

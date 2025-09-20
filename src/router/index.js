@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
 import HomepageView from '../views/HomepageView.vue'
 import ChooseRoleView from '../views/ChooseRoleView.vue'
+import DashboardView from '../views/DashboardView.vue'
 
 // Actor-specific register pages
 import RegisterFarmerView from '../views/RegisterFarmerView.vue'
@@ -20,9 +21,14 @@ const routes = [
     component: HomepageView,
   },
   {
+    path: '/dash',
+    name: 'Dash',
+    component: DashboardView,
+  },
+  {
     path: '/register',
     name: 'ChooseRole',
-    component: ChooseRoleView, // ✅ goes to role selection first
+    component: ChooseRoleView,
   },
   {
     path: '/register-farmer',
