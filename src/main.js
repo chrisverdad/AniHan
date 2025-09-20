@@ -12,6 +12,11 @@ import * as directives from 'vuetify/directives'
 // Optional: Bootstrap (if you still want it)
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+// vercel
+import { injectSpeedInsights } from '@vercel/speed-insights'
+
+injectSpeedInsights()
+
 const vuetify = createVuetify({
   components,
   directives,
@@ -21,6 +26,6 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
-app.use(vuetify) 
+app.use(vuetify)
 
 app.mount('#app')
