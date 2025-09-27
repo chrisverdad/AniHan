@@ -11,6 +11,7 @@ import * as directives from 'vuetify/directives'
 
 // Optional: Bootstrap (if you still want it)
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '@fortawesome/fontawesome-free/css/all.min.css'
 
 // vercel
 import { injectSpeedInsights } from '@vercel/speed-insights'
