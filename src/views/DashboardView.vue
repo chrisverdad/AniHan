@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import anihanLogo from '@/assets/images/anihan.png'
+import anihanLogo from '/src/assets/images/anihan.png'
 </script>
 
 <style scoped>
