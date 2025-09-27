@@ -2,7 +2,7 @@
   <div class="dashboard">
     <!-- Sidebar / Top Navigation -->
     <aside class="sidebar">
-      <img src="@/assets/images/anihan.png" alt="AniHan Logo" class="logo" />
+      <img src="/src/assets/images/anihan.png" alt="AniHan Logo" class="logo" />
       <ul>
         <li><i class="fas fa-home"></i><span>Home</span></li>
         <li><i class="fas fa-chart-line"></i><span>Charts</span></li>
