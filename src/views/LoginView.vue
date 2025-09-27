@@ -20,7 +20,7 @@ function handleLogin() {
     <!-- Right side (login form) -->
     <div class="login-form">
       <div class="form-box">
-        <img src="@/assets/images/AniHan.png" alt="AniHan Logo" class="login-logo" />
+        <img src="@/assets/images/anihan.png" alt="AniHan Logo" class="login-logo" />
         <p>Login to Your Account</p>
         <form @submit.prevent="handleLogin">
           <input type="text" v-model="username" placeholder="Username" required />
