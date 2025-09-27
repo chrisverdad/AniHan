@@ -1,198 +1,173 @@
 <template>
   <div class="dashboard">
-    <!-- Header -->
-    <header class="header">
-      <!-- Left: Logo -->
-      <div class="logo">
-        <img src="@/assets/images/logo.png" alt="AniHan Logo" />
-        <h1>AniHan</h1>
+    <!-- Sidebar / Top Navigation -->
+    <aside class="sidebar">
+      <img src="@/assets/images/anihan.png" alt="AniHan Logo" class="logo" />
+      <ul>
+        <li><i class="fas fa-home"></i><span>Home</span></li>
+        <li><i class="fas fa-chart-line"></i><span>Charts</span></li>
+        <li><i class="fas fa-envelope"></i><span>Transaction</span></li>
+        <li><i class="fas fa-question-circle"></i><span>Submit My Produce</span></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="header">AniHan Dashboard</div>
+
+      <div class="cards">
+        <div class="card">Chart 1</div>
+        <div class="card">Chart 2</div>
+        <div class="card">Chart 3</div>
+        <div class="card">Chart 4</div>
       </div>
-
-      <!-- Right: Profile + Notifications -->
-      <div class="profile">
-        <i class="fas fa-bell notif"></i>
-        <img src="@/assets/images/avatar.png" alt="Profile" class="avatar" />
-      </div>
-    </header>
-
-    <!-- Main Layout -->
-    <div class="main-layout">
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <ul>
-          <li><i class="fas fa-home"></i><span>Overview</span></li>
-          <li><i class="fas fa-seedling"></i><span>Produce</span></li>
-          <li><i class="fas fa-box"></i><span>Orders</span></li>
-          <li><i class="fas fa-chart-line"></i><span>Reports</span></li>
-        </ul>
-      </aside>
-
-      <!-- Content -->
-      <main class="content">
-        <h2>Dashboard Overview</h2>
-        <p>Welcome to AniHan's farmer/vendor dashboard! 🚜🌱</p>
-      </main>
-
-      <!-- Right Panel -->
-      <aside class="right-panel">
-        <h3>Latest Updates</h3>
-        <ul>
-          <li><span>2 hours ago</span> - New order placed</li>
-          <li><span>1 day ago</span> - Market prices updated</li>
-          <li><span>2 days ago</span> - System maintenance scheduled</li>
-        </ul>
-      </aside>
-    </div>
+    </main>
   </div>
 </template>
 
 <script setup>
-// UI only
+// No logic yet, charts will be added later
 </script>
 
 <style scoped>
 .dashboard {
+  display: flex;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f6f8fa;
-}
-
-/* HEADER */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(90deg, #025b2d, #057f42, #43a047);
-  color: white;
-  padding: 0.6rem 1rem;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.logo img {
-  height: 28px;
-}
-
-.logo h1 {
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.search-bar input {
-  width: 320px;
-  padding: 0.4rem 0.6rem;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-  font-size: 0.9rem;
-}
-
-.profile {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-.profile .notif {
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.profile img {
-  height: 36px;
-  width: 36px;
-}
-
-.avatar {
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px solid #ddd;
-}
-
-/* MAIN LAYOUT */
-.main-layout {
-  flex: 1;
-  display: flex;
+  background: #f5f5f5;
   overflow: hidden;
 }
 
-/* SIDEBAR */
 .sidebar {
-  width: 220px;
-  background: #fff;
-  border-right: 1px solid #e1e4e8;
-  padding: 1rem 0;
+  width: 70px;
+  background: #519974;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0;
+  transition: width 0.3s;
+  flex-shrink: 0;
 }
-
+.sidebar:hover {
+  width: 200px;
+}
+.sidebar .logo {
+  width: 40px;
+  margin: 1rem 0;
+}
 .sidebar ul {
   list-style: none;
+  width: 100%;
   padding: 0;
   margin: 0;
 }
-
 .sidebar li {
-  padding: 0.7rem 1rem;
-  cursor: pointer;
-  color: #24292e;
+  padding: 1rem;
+  color: white;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  font-size: 0.95rem;
-  border-radius: 6px;
-  transition: background 0.2s;
+  cursor: pointer;
+  transition: background 0.3s;
 }
-
 .sidebar li:hover {
-  background: #f3f4f6;
+  background: #038a44;
+}
+.sidebar i {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+}
+.sidebar span {
+  display: none;
+}
+.sidebar:hover span {
+  display: inline;
 }
 
-.sidebar li i {
-  font-size: 18px;
-}
-
-/* CONTENT */
-.content {
+/* Main content */
+.main {
   flex: 1;
-  padding: 1.5rem;
-  background: #fefefe;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
-}
-
-/* RIGHT PANEL */
-.right-panel {
-  width: 260px;
-  background: #fff;
-  border-left: 1px solid #e1e4e8;
   padding: 1rem;
-  font-size: 0.9rem;
 }
 
-.right-panel h3 {
+.header {
+  background: linear-gradient(90deg, #2fa266, #519974);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
   margin-bottom: 1rem;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-.right-panel ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
 }
-
-.right-panel li {
-  margin-bottom: 1rem;
+.card {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
   color: #444;
 }
 
-.right-panel li span {
-  color: #6a737d;
-  font-size: 0.8rem;
-  display: block;
+/* ===== Mobile Styles ===== */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  /* Sidebar becomes top nav */
+  .sidebar {
+    flex-direction: row;
+    width: 100%;
+    height: 60px;
+    justify-content: space-around;
+    padding: 0 0.5rem;
+  }
+
+  .sidebar:hover {
+    width: 100%;
+  }
+
+  .sidebar .logo {
+    display: none;
+  }
+
+  .sidebar ul {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .sidebar li {
+    padding: 0.5rem;
+    flex-direction: column;
+    font-size: 0.8rem;
+  }
+
+  .sidebar i {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  .sidebar span {
+    display: none !important; /* icons only */
+  }
+
+  .main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+  }
 }
 </style>

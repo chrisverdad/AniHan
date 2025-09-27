@@ -9,6 +9,9 @@ import RegisterFarmerView from '../views/RegisterFarmerView.vue'
 import RegisterPublicView from '../views/RegisterPublicView.vue'
 import RegisterAdminView from '../views/RegisterAdminView.vue'
 
+// Icons
+import '@fortawesome/fontawesome-free/css/all.min.css'
+
 const routes = [
   {
     path: '/',
