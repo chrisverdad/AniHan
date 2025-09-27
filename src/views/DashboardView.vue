@@ -2,7 +2,7 @@
   <div class="dashboard">
     <!-- Sidebar / Top Navigation -->
     <aside class="sidebar">
-      <img src="/src/assets/images/anihan.png" alt="AniHan Logo" class="logo" />
+      <img :src="anihanLogo" alt="AniHan Logo" class="logo" />
       <ul>
         <li><i class="fas fa-home"></i><span>Home</span></li>
         <li><i class="fas fa-chart-line"></i><span>Charts</span></li>
@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-// No logic yet, charts will be added later
+import anihanLogo from '@/assets/images/anihan.png'
 </script>
 
 <style scoped>
@@ -120,7 +120,7 @@
   color: #444;
 }
 
-/* ===== Mobile Styles ===== */
+/* mobile*/
 @media (max-width: 768px) {
   .dashboard {
     flex-direction: column;
@@ -161,7 +161,7 @@
   }
 
   .sidebar span {
-    display: none !important; /* icons only */
+    display: none !important;
   }
 
   .main {
