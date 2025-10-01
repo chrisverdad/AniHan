@@ -4,10 +4,22 @@
     <aside class="sidebar">
       <img src="@/assets/images/anihan.png" alt="AniHan Logo" class="logo" />
       <ul>
-        <li><i class="fas fa-home"></i><span>Home</span></li>
-        <li><i class="fas fa-chart-line"></i><span>Charts</span></li>
-        <li><i class="fas fa-envelope"></i><span>Transaction</span></li>
-        <li><i class="fas fa-question-circle"></i><span>Submit My Produce</span></li>
+        <li>
+          <router-link to="/dash"> <i class="fas fa-home"></i><span>Home</span> </router-link>
+        </li>
+        <li>
+          <router-link to="#"> <i class="fas fa-chart-line"></i><span>Charts</span> </router-link>
+        </li>
+        <li>
+          <router-link to="#">
+            <i class="fas fa-envelope"></i><span>Transaction</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/submit-waste">
+            <i class="fas fa-question-circle"></i><span>Submit My Produce</span>
+          </router-link>
+        </li>
       </ul>
     </aside>
 
@@ -31,6 +43,19 @@
   height: 100vh;
   background: #f5f5f5;
   overflow: hidden;
+}
+/* Remove default blue link color and underline */
+.sidebar a {
+  color: inherit; /* inherits the white you had for <li> */
+  text-decoration: none; /* removes underline */
+  display: flex; /* makes icons + text align properly */
+  align-items: center;
+  width: 100%;
+}
+
+/* Keep the hover effect you had on li */
+.sidebar li:hover {
+  background: #038a44;
 }
 
 .sidebar {

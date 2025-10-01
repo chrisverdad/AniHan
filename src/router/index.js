@@ -9,6 +9,9 @@ import RegisterFarmerView from '../views/RegisterFarmerView.vue'
 import RegisterPublicView from '../views/RegisterPublicView.vue'
 import RegisterAdminView from '../views/RegisterAdminView.vue'
 
+// Dashboard Farmer/Vendors
+import SurplusView from '../views/SurplusView.vue'
+
 const routes = [
   {
     path: '/',
@@ -44,6 +47,13 @@ const routes = [
     path: '/register-admin',
     name: 'RegisterAdmin',
     component: RegisterAdminView,
+  },
+
+  // Farmer Dashboard
+  {
+    path: '/submit-waste',
+    name: 'SubmitWaste',
+    component: SurplusView,
   },
 ]
 
