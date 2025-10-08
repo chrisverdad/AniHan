@@ -11,6 +11,7 @@ import RegisterAdminView from '../views/RegisterAdminView.vue'
 
 // Dashboard Farmer/Vendors
 import SurplusView from '../views/SurplusView.vue'
+import TransactionView from '../views/TransactionView.vue'
 
 const routes = [
   {
@@ -54,6 +55,12 @@ const routes = [
     path: '/submit-waste',
     name: 'SubmitWaste',
     component: SurplusView,
+  },
+
+  {
+    path: '/transaction',
+    name: 'Transaction',
+    component: TransactionView,
   },
 ]
 

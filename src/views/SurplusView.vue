@@ -1,11 +1,9 @@
 <template>
   <div class="surplus-page">
-    <!-- Header -->
     <header class="header">
       <h1>🍃 Submit My Produce</h1>
     </header>
 
-    <!-- Card Grid -->
     <div class="card-grid">
       <div
         v-for="(item, index) in produce"
@@ -13,18 +11,15 @@
         class="produce-card"
         @click="toggleDetails(index)"
       >
-        <!-- Default collapsed card -->
         <div v-if="activeIndex !== index" class="collapsed-view">
           <img :src="item.main" :alt="item.name" class="produce-image" />
           <h3 class="produce-title">{{ item.name }}</h3>
         </div>
 
-        <!-- Expanded detailed card -->
         <div v-else class="expanded-view">
           <h3 class="produce-title">{{ item.name }}</h3>
 
           <div class="classification-container">
-            <!-- Overripe -->
             <div class="classification-card">
               <img :src="item.overripe" :alt="item.name + ' Overripe'" class="produce-image" />
               <h4>Overripe</h4>
@@ -65,7 +60,7 @@
 <script setup>
 import { ref } from 'vue'
 
-// ✅ Import your images
+// images
 import bananaMain from '@/assets/images/surplus/banana.png'
 import bananaBruised from '@/assets/images/surplus/bananabruised.png'
 import mangoMain from '@/assets/images/surplus/mango.png'
@@ -75,7 +70,7 @@ import tomatoBruised from '@/assets/images/surplus/tomatobruised.png'
 
 const activeIndex = ref(null)
 
-// ✅ Produce data
+//  Produce data
 const produce = ref([
   {
     name: 'Banana',
@@ -109,12 +104,12 @@ const produce = ref([
   },
 ])
 
-// ✅ Toggle expanded view
+// Toggle expanded view
 const toggleDetails = (index) => {
   activeIndex.value = activeIndex.value === index ? null : index
 }
 
-// ✅ Quantity functions (minimum 5)
+// Quantity functions (minimum 5)
 const increase = (item, type) => {
   if (type === 'overripe') item.overripeQty++
   else item.bruisedQty++
@@ -124,7 +119,7 @@ const decrease = (item, type) => {
   if (type === 'bruised' && item.bruisedQty > 5) item.bruisedQty--
 }
 
-// ✅ Pricing logic (₱10 per 5 pieces)
+// Pricing logic (₱10 per 5 pieces)
 const calculateAmount = (qty) => {
   if (qty <= 10) return 10
   else if (qty <= 15) return 20
@@ -135,14 +130,12 @@ const calculateAmount = (qty) => {
 </script>
 
 <style scoped>
-/* Page */
 .surplus-page {
   padding: 0;
   background: #f9fafb;
   min-height: 100vh;
 }
 
-/* Header */
 .header {
   background-color: #2fa266;
   color: white;
@@ -153,7 +146,6 @@ const calculateAmount = (qty) => {
   border-bottom: 3px solid #238752;
 }
 
-/* Grid */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -161,7 +153,6 @@ const calculateAmount = (qty) => {
   padding: 1.5rem;
 }
 
-/* Card */
 .produce-card {
   background: #fff;
   border-radius: 14px;
@@ -178,7 +169,6 @@ const calculateAmount = (qty) => {
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-/* Default (collapsed) */
 .collapsed-view {
   display: flex;
   flex-direction: column;
@@ -190,12 +180,10 @@ const calculateAmount = (qty) => {
   margin-top: 0.4rem;
 }
 
-/* Expanded view */
 .expanded-view {
   cursor: default;
 }
 
-/* Title */
 .produce-title {
   font-size: 1.3rem;
   font-weight: 600;
@@ -203,7 +191,6 @@ const calculateAmount = (qty) => {
   margin-bottom: 1rem;
 }
 
-/* Classifications */
 .classification-container {
   display: flex;
   justify-content: space-between;
@@ -226,8 +213,6 @@ const calculateAmount = (qty) => {
   color: #555;
   margin-bottom: 0.8rem;
 }
-
-/* Image */
 .produce-image {
   width: 100%;
   height: 120px;
@@ -235,7 +220,6 @@ const calculateAmount = (qty) => {
   margin-bottom: 0.5rem;
 }
 
-/* Counter */
 .quantity-counter {
   display: flex;
   align-items: center;

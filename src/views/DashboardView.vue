@@ -11,7 +11,7 @@
           <router-link to="#"> <i class="fas fa-chart-line"></i><span>Charts</span> </router-link>
         </li>
         <li>
-          <router-link to="#">
+          <router-link to="transaction">
             <i class="fas fa-envelope"></i><span>Transaction</span>
           </router-link>
         </li>

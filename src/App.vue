@@ -2,7 +2,8 @@
 
 <template>
   <v-app>
-    <router-view /> <!-- This will render HomepageView.vue -->
+    <router-view />
+    <!-- This will render HomepageView.vue -->
   </v-app>
 </template>
 
