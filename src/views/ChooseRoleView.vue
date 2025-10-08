@@ -1,6 +1,5 @@
 <template>
   <div class="choose-role">
-    <!-- 🔙 Circle Arrow Navigation -->
     <div class="back-nav">
       <router-link to="/" class="back-link">
         <span class="circle-arrow">←</span>

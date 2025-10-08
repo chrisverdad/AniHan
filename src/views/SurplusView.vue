@@ -13,30 +13,48 @@
         class="produce-card"
         @click="toggleDetails(index)"
       >
-        <!-- Hover swap image -->
-        <img
-          :src="hoveredIndex === index ? item.bruised : item.overripe"
-          :alt="item.name"
-          class="produce-image"
-          @mouseenter="hoveredIndex = index"
-          @mouseleave="hoveredIndex = null"
-        />
+        <!-- Default collapsed card -->
+        <div v-if="activeIndex !== index" class="collapsed-view">
+          <img :src="item.main" :alt="item.name" class="produce-image" />
+          <h3 class="produce-title">{{ item.name }}</h3>
+        </div>
 
-        <h3 class="produce-title">{{ item.name }}</h3>
+        <!-- Expanded detailed card -->
+        <div v-else class="expanded-view">
+          <h3 class="produce-title">{{ item.name }}</h3>
 
-        <!-- Details -->
-        <div v-if="activeIndex === index" class="details">
-          <p><strong>Classification:</strong> {{ item.classification }}</p>
-          <p class="definition">{{ item.definition }}</p>
+          <div class="classification-container">
+            <!-- Overripe -->
+            <div class="classification-card">
+              <img :src="item.overripe" :alt="item.name + ' Overripe'" class="produce-image" />
+              <h4>Overripe</h4>
+              <p class="definition">{{ item.overripeDesc }}</p>
 
-          <label>Choose Quantity:</label>
-          <select v-model="item.selectedQuantity" class="quantity-select">
-            <option v-for="option in item.quantities" :key="option.value" :value="option.value">
-              {{ option.label }}
-            </option>
-          </select>
+              <div class="quantity-counter">
+                <button @click.stop="decrease(item, 'overripe')" class="counter-btn">-</button>
+                <span>{{ item.overripeQty }}</span>
+                <button @click.stop="increase(item, 'overripe')" class="counter-btn">+</button>
+              </div>
 
-          <p class="amount">💰 Amount: ₱{{ calculateAmount(item) }}</p>
+              <p class="amount">💰 Amount: ₱{{ calculateAmount(item.overripeQty) }}</p>
+            </div>
+
+            <!-- Bruised -->
+            <div class="classification-card">
+              <img :src="item.bruised" :alt="item.name + ' Bruised'" class="produce-image" />
+              <h4>Bruised</h4>
+              <p class="definition">{{ item.bruisedDesc }}</p>
+
+              <div class="quantity-counter">
+                <button @click.stop="decrease(item, 'bruised')" class="counter-btn">-</button>
+                <span>{{ item.bruisedQty }}</span>
+                <button @click.stop="increase(item, 'bruised')" class="counter-btn">+</button>
+              </div>
+
+              <p class="amount">💰 Amount: ₱{{ calculateAmount(item.bruisedQty) }}</p>
+            </div>
+          </div>
+
           <button class="submit-btn">Submit Waste</button>
         </div>
       </div>
@@ -48,69 +66,71 @@
 import { ref } from 'vue'
 
 // ✅ Import your images
-import bananaOverripe from '@/assets/images/surplus/banana.png'
+import bananaMain from '@/assets/images/surplus/banana.png'
 import bananaBruised from '@/assets/images/surplus/bananabruised.png'
-import mangoOverripe from '@/assets/images/surplus/mango.png'
+import mangoMain from '@/assets/images/surplus/mango.png'
 import mangoBruised from '@/assets/images/surplus/mangobruised.png'
-import tomatoOverripe from '@/assets/images/surplus/tomato.png'
+import tomatoMain from '@/assets/images/surplus/tomato.png'
 import tomatoBruised from '@/assets/images/surplus/tomatobruised.png'
 
-const hoveredIndex = ref(null)
 const activeIndex = ref(null)
 
+// ✅ Produce data
 const produce = ref([
   {
     name: 'Banana',
-    overripe: bananaOverripe,
+    main: bananaMain,
+    overripe: bananaMain,
     bruised: bananaBruised,
-    classification: 'Overripe & Bruised',
-    definition: 'Overripe bananas are soft and brownish, bruised bananas have damaged skin.',
-    quantities: [
-      { label: '5-10', value: 50 },
-      { label: '11-15', value: 100 },
-      { label: '16-20', value: 150 },
-      { label: '21+', value: 200 },
-    ],
-    selectedQuantity: 50,
+    overripeDesc: 'Soft and brownish skin — slightly damaged but still usable.',
+    bruisedDesc: 'Heavily bruised with dark spots and visible damage.',
+    overripeQty: 5,
+    bruisedQty: 5,
   },
   {
     name: 'Mango',
-    overripe: mangoOverripe,
+    main: mangoMain,
+    overripe: mangoMain,
     bruised: mangoBruised,
-    classification: 'Overripe & Bruised',
-    definition: 'Overripe mangoes are too soft, bruised mangoes show dark patches.',
-    quantities: [
-      { label: '5-10', value: 60 },
-      { label: '11-15', value: 120 },
-      { label: '16-20', value: 180 },
-      { label: '21+', value: 250 },
-    ],
-    selectedQuantity: 60,
+    overripeDesc: 'Too soft and sweet — ideal for jam or puree.',
+    bruisedDesc: 'Dark patches on skin, slightly fermented scent.',
+    overripeQty: 5,
+    bruisedQty: 5,
   },
   {
     name: 'Tomato',
-    overripe: tomatoOverripe,
+    main: tomatoMain,
+    overripe: tomatoMain,
     bruised: tomatoBruised,
-    classification: 'Overripe & Bruised',
-    definition: 'Overripe tomatoes are mushy, bruised tomatoes have damaged spots.',
-    quantities: [
-      { label: '5-10', value: 40 },
-      { label: '11-15', value: 80 },
-      { label: '16-20', value: 120 },
-      { label: '21+', value: 160 },
-    ],
-    selectedQuantity: 40,
+    overripeDesc: 'Mushy texture, still good for sauces.',
+    bruisedDesc: 'Cracked or spotted, suitable for fertilizer.',
+    overripeQty: 5,
+    bruisedQty: 5,
   },
 ])
 
-// Toggle details
+// ✅ Toggle expanded view
 const toggleDetails = (index) => {
   activeIndex.value = activeIndex.value === index ? null : index
 }
 
-// Compute amount
-const calculateAmount = (item) => {
-  return item.selectedQuantity
+// ✅ Quantity functions (minimum 5)
+const increase = (item, type) => {
+  if (type === 'overripe') item.overripeQty++
+  else item.bruisedQty++
+}
+const decrease = (item, type) => {
+  if (type === 'overripe' && item.overripeQty > 5) item.overripeQty--
+  if (type === 'bruised' && item.bruisedQty > 5) item.bruisedQty--
+}
+
+// ✅ Pricing logic (₱10 per 5 pieces)
+const calculateAmount = (qty) => {
+  if (qty <= 10) return 10
+  else if (qty <= 15) return 20
+  else if (qty <= 20) return 30
+  else if (qty <= 25) return 40
+  else return 50 // keeps increasing if they add more
 }
 </script>
 
@@ -124,7 +144,7 @@ const calculateAmount = (item) => {
 
 /* Header */
 .header {
-  background-color: #2fa266; /* Same as Dashboard */
+  background-color: #2fa266;
   color: white;
   padding: 1rem 2rem;
   font-size: 1.8rem;
@@ -136,16 +156,16 @@ const calculateAmount = (item) => {
 /* Grid */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
   padding: 1.5rem;
 }
 
 /* Card */
 .produce-card {
   background: #fff;
-  border-radius: 12px;
-  padding: 1rem;
+  border-radius: 14px;
+  padding: 1.2rem;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -158,49 +178,93 @@ const calculateAmount = (item) => {
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-/* Image */
-.produce-image {
-  width: 100%;
-  height: 140px;
-  object-fit: contain;
-  margin-bottom: 0.5rem;
+/* Default (collapsed) */
+.collapsed-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.click-note {
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 0.4rem;
+}
+
+/* Expanded view */
+.expanded-view {
+  cursor: default;
 }
 
 /* Title */
 .produce-title {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #2fa266;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-/* Details */
-.details {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  text-align: left;
+/* Classifications */
+.classification-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.classification-card {
+  flex: 1;
+  background: #f5fdf8;
+  border-radius: 10px;
+  padding: 0.8rem;
+  border: 1px solid #d3f1e0;
+}
+.classification-card h4 {
+  color: #2fa266;
+  font-weight: 600;
+  margin: 0.5rem 0;
 }
 .definition {
   font-size: 0.85rem;
   color: #555;
   margin-bottom: 0.8rem;
 }
-.quantity-select {
-  margin-top: 0.3rem;
-  padding: 0.3rem;
+
+/* Image */
+.produce-image {
   width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
 }
 
-/* Amount + Button */
+/* Counter */
+.quantity-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+.counter-btn {
+  background: #2fa266;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.counter-btn:hover {
+  background: #238752;
+}
+
+/* Amount */
 .amount {
   font-weight: bold;
   color: #2fa266;
-  margin-top: 0.6rem;
 }
+
+/* Submit Button */
 .submit-btn {
-  margin-top: 0.8rem;
+  margin-top: 1rem;
   width: 100%;
   background: #2fa266;
   color: white;
